@@ -1,18 +1,2 @@
-# Arduino-Door-Lock-cum-Calculator-
-lcd pin connection
-1 vss--ground
-2 vcc--5v
-3 vee--middle pin of potentiometer
-4 rs--A0
-5 r/w--ground
-6 en--A1
-7 d0
-8 d1
-9 d2
-10 d3
-11 d4--A2
-12 d5--A3
-13 d6--A4
-14 d7--A5
-15 led+
-16 led-
+# Simple Arduino-Door-Lock-cum-Calculator-
+Mode selects doorLock/Calculator. In calc,'#' is used to perform operation and '*' to clear all for new operation. There are limits to how many number-operation that can be done. In doorLock,user first sets the password then door lock operation happens. For privacy entered inputs are displayed as '*'. If 3 wrong attempts are made, buzzer goes off for 3 seconds. '#' is used for resetting password and '*' to reenter input if any mistake is made while typing.
