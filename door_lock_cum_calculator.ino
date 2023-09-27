@@ -68,6 +68,11 @@ void loop() {
 void calculator(){
   char key = keypad.getKey();//take key
   if(key == '*' && key != NO_KEY){//make sure key is actually pressed
+    //clear door lock variables and display when changing mode
+    input="";
+    password="";
+    count=0;
+    lcd.setCursor(0,0);
     clearDisplayAndVars(); //Clear display and variables
   } 
   if(key == '#' && key != NO_KEY){
@@ -155,16 +160,17 @@ void doorLock(){
     lcd.setCursor(count, 1); // move cursor to show each new char as secret ‘*’
     lcd.print("*");
     count++; // increment data array by 1 to store new char, also keep track of the number of chars entered
-    if(key=='#'){//to set new user defined password again
+    if(key=='*'){//to clear display, calc variables and to set new user defined password again
+      clearDisplayAndVars();
       input="";
       password="";
       count=0;
       lcd.clear();
       lcd.print("Enter new passW");
-      lcd.setCursor(0,1);
+      lcd.setCursor(0,1);//password on the 2nd row
       char key = keypad.getKey();
     }
-    if(key=='*'){//to clear input
+    if(key=='#'){//to clear input
       input="";
       count=0;
       lcd.clear();
