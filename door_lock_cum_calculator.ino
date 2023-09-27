@@ -125,11 +125,12 @@ void makeNumbers(char key){
   if(operatorChar == ""){//entering first num till operator is not entered
     operand1 += key;//accumulate all keys in op1
   } 
-  else if(operatorChar.length() == 1 and calculate == false) { //First number completed,checks operator entered and '#' is not yet entered to do calculation 
+  else if(operatorChar.length() == 1 and calculate == false) { 
+    //First number completed,checks operator entered and '#' is not yet entered to do calculation 
     operand2 += key;//accumulate all keys in op2
   }
   num1 = operand1.toInt();//converts all accumulated keys to operatable values
-  num2 = operand2.toInt();
+  num2 = operand2.toInt();//has a limit of how much number calculation it can handle
 }
 
 void doCalculation(){
@@ -242,7 +243,7 @@ void doorLock(){
 
 // Function to store the password in EEPROM
 void storePassword(String password) {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 4; i++) {//password length is 4
   EEPROM.write(address + i, password[i]);
   }
 }
