@@ -67,8 +67,8 @@ void loop() {
 
 void calculator(){
   char key = keypad.getKey();//take key
-  if(key == '*' && key != NO_KEY){//make sure key is actually pressed
-    //clear door lock variables and display when changing mode
+  if(key == '*' && key != NO_KEY){//to make sure key is actually pressed
+    //clear door lock variables and display when mode is changed
     input="";
     password="";
     count=0;
@@ -89,6 +89,7 @@ void calculator(){
   } 
   else if(key != NO_KEY && key!='*'){  //An operator is entered
     lcd.setCursor(firstline, 0);   //Operators will be shown on the first line
+    //mapping ABCD to +-*/
     if(key == 'A') {
       operatorChar = "+";
       lcd.print("+");
@@ -153,14 +154,6 @@ void doorLock(){
   char key = keypad.getKey();
   // If a key is pressed, then only add it to the input
   if (key) {
-    if (password == "") {
-      lcd.setCursor(0,0);
-      lcd.print("Enter new passW");
-    }
-    input += key;//accumulate keys to input
-    lcd.setCursor(count, 1); // move cursor to show each new char as secret ‘*’
-    lcd.print("*");
-    count++; // increment data array by 1 to store new char, also keep track of the number of chars entered
     if(key=='*'){//to clear display, calc variables and to set new user defined password again
       clearDisplayAndVars();
       input="";
@@ -171,6 +164,14 @@ void doorLock(){
       lcd.setCursor(0,1);//password on the 2nd row
       char key = keypad.getKey();
     }
+    if (password == "") {
+      lcd.setCursor(0,0);
+      lcd.print("Enter new passW");
+    }
+    input += key;//accumulate keys to input
+    lcd.setCursor(count, 1); // move cursor to show each new char as secret ‘*’
+    lcd.print("*");
+    count++; // increment data array by 1 to store new char, also keep track of the number of chars entered
     if(key=='#'){//to clear input
       input="";
       count=0;
@@ -181,7 +182,7 @@ void doorLock(){
     }
     }
     // Check if the input is complete
-    if (input.length() == 4) {//change this 4 to different values
+  if (input.length() == 4) {//change this 4 to different values
       count=0;
     // If the password has not been set yet, store the input as the new password
     if (password == "") {
@@ -228,17 +229,17 @@ void doorLock(){
         input = ""; //make input null string again to retake input
       }
       count=0;
-    }
+     }
     }
     // If the door is unlocked, display a message
-    if (unlocked) {
-      lcd.clear();
-      lcd.print("Welcome!");
-      delay(2000);
-      lcd.clear();
-      lcd.print("Enter password:");
-      unlocked = false;
-    }
+  if (unlocked) {
+    lcd.clear();
+    lcd.print("Welcome!");
+    delay(2000);
+    lcd.clear();
+    lcd.print("Enter password:");
+    unlocked = false;
+  }
 }
 
 // Function to store the password in EEPROM
